@@ -8,7 +8,7 @@ git = "https://github.com/MystenLabs/sui.git"
 subdir = "crates/sui-framework/packages/sui-framework"
 rev = "mainnet"
 
-[dependencies.math]
+[dependencies.MathNavi]
 local = "../math"
 
 [dependencies.oracle]
