@@ -2,20 +2,10 @@
 name = "lending_core"
 version = "0.0.1"
 published-at = "0x81c408448d0d57b3e371ea94de1d40bf852784d3e225de1e74acab3e8395c18f"
-
-[dependencies.Sui]
-git = "https://github.com/MystenLabs/sui.git"
-subdir = "crates/sui-framework/packages/sui-framework"
-rev = "mainnet"
-
-[dependencies.MathNavi]
-local = "../math"
+edition = "2024"
 
 [dependencies.oracle]
 local = "../oracle"
-
-[dependencies.utils]
-local = "../utils"
 
 [addresses]
 sui = "0x2"
