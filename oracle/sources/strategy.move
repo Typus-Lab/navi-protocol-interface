@@ -1,17 +1,40 @@
 module oracle::strategy {
-    native public fun validate_price_difference(primary_price: u256, secondary_price: u256, threshold1: u64, threshold2: u64, current_timestamp: u64, max_duration_within_thresholds: u64, ratio2_usage_start_time: u64): u8;
+    public fun is_oracle_price_fresh(arg0: u64, arg1: u64, arg2: u64) : bool {
+        if (arg0 < arg1) {
+            return false
+        };
+        arg0 - arg1 < arg2
+    }
 
-    // return bool: is_normal
-    native public fun validate_price_range_and_history(
-        price: u256,
-        maximum_effective_price: u256,
-        minimum_effective_price: u256,
-        maximum_allowed_span_percentage: u64,
-        current_timestamp: u64,
-        historical_price_ttl: u64,
-        historical_price: u256,
-        historical_updated_time: u64,
-    ): bool;
+    public fun validate_price_difference(arg0: u256, arg1: u256, arg2: u64, arg3: u64, arg4: u64, arg5: u64, arg6: u64) : u8 {
+        let v0 = oracle::oracle_utils::calculate_amplitude(arg0, arg1);
+        if (v0 < arg2) {
+            return oracle::oracle_constants::level_normal()
+        };
+        if (v0 > arg3) {
+            return oracle::oracle_constants::level_critical()
+        };
+        if (arg6 > 0 && arg4 > arg5 + arg6) {
+            return oracle::oracle_constants::level_major()
+        };
+        oracle::oracle_constants::level_warning()
+    }
 
-    native public fun is_oracle_price_fresh(current_timestamp: u64, oracle_timestamp: u64, max_timestamp_diff: u64): bool;
+    public fun validate_price_range_and_history(arg0: u256, arg1: u256, arg2: u256, arg3: u64, arg4: u64, arg5: u64, arg6: u256, arg7: u64) : bool {
+        if (arg1 > 0 && arg0 > arg1) {
+            return false
+        };
+        if (arg0 < arg2) {
+            return false
+        };
+        if (arg4 - arg7 < arg5) {
+            if (oracle::oracle_utils::calculate_amplitude(arg6, arg0) > arg3) {
+                return false
+            };
+        };
+        true
+    }
+
+    // decompiled from Move bytecode v6
 }
+
