@@ -746,6 +746,11 @@ module lending_core::incentive_v3 {
         0x2::balance::split<T0>(&mut arg0.balance, v0)
     }
 
+    #[test_only]
+    public fun test_create_incentive(ctx: &mut TxContext) {
+        create_incentive_v3(ctx);
+    }
+
     // decompiled from Move bytecode v6
 }
 

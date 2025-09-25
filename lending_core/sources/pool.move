@@ -165,6 +165,15 @@ module lending_core::pool {
         0x2::transfer::public_transfer<0x2::coin::Coin<T0>>(0x2::coin::from_balance<T0>(0x2::balance::split<T0>(&mut arg1.treasury_balance, arg2), arg4), arg3);
     }
 
+    #[test_only]
+    public fun test_init(ctx: &mut TxContext) {
+        init(ctx);
+    }
+
+    #[test_only]
+    public fun test_create_pool<T>(ctx: &mut TxContext, pool_admin_cap: &PoolAdminCap, decimal: u8) {
+        create_pool<T>(pool_admin_cap, decimal, ctx);
+    }
     // decompiled from Move bytecode v6
 }
 

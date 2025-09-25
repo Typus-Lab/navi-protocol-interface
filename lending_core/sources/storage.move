@@ -519,6 +519,11 @@ module lending_core::storage {
         0x2::event::emit<WithdrawTreasuryEvent>(v6);
     }
 
+    #[test_only]
+    public fun test_init(ctx: &mut TxContext) {
+        init(ctx);
+    }
+
     // decompiled from Move bytecode v6
 }
 
