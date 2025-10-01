@@ -145,5 +145,9 @@ module oracle::oracle {
     }
 
     // decompiled from Move bytecode v6
+    #[test_only]
+    public fun test_init(ctx: &mut 0x2::tx_context::TxContext) {
+        init(ctx);
+    }
 }
 
